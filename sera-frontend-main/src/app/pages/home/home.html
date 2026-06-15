@@ -1,0 +1,33 @@
+<div class="home-container">
+  <!-- 3D Particle Background -->
+  <app-particle-canvas [mode]="currentMode"></app-particle-canvas>
+
+  <!-- UI Overlay -->
+  <div class="ui-layer">
+    <!-- Decorative Corners -->
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+    <!-- Chat Panel -->
+    <app-chat-panel [isOpen]="isChatOpen" (close)="onChatClose()"></app-chat-panel>
+
+    <!-- Header -->
+    <app-hud-header [systemText]="systemText" [time]="time" [date]="date"></app-hud-header>
+
+    <!-- Side Dock -->
+    <app-side-dock [isChatActive]="isChatOpen" [isEmojiActive]="isEmojiMode" [isHeartActive]="isHeartMode"
+      (chatClick)="onChatToggle()" (emojiClick)="onEmojiClick()" (heartClick)="onHeartClick()"></app-side-dock>
+
+    <!-- Main Display -->
+    <div class="main-display">
+      <div class="transcript-container" [class.active]="showTranscript">
+        <div class="transcript-text">{{ transcriptText }}</div>
+      </div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <app-controls-dock [isMicActive]="isListening" (micClick)="onMicClick()" (textSubmit)="onTextSubmit($event)"></app-controls-dock>
+  </div>
+</div>

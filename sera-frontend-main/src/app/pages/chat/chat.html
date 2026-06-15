@@ -1,0 +1,76 @@
+<div class="chat-page">
+  <aside class="chat-sidebar">
+    <div class="sidebar-header">
+      <div class="brand">SERA</div>
+      <button class="new-chat-btn" (click)="startNewChat()">
+        <i class="fas fa-plus"></i>
+        New chat
+      </button>
+    </div>
+
+    <div class="conversation-list">
+      <div class="conversation-item active">
+        <i class="fas fa-message"></i>
+        <span>Current chat</span>
+      </div>
+      <div class="conversation-item">
+        <i class="fas fa-clock"></i>
+        <span>Recent session</span>
+      </div>
+      <div class="conversation-item">
+        <i class="fas fa-star"></i>
+        <span>Pinned ideas</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="back-btn" (click)="goHome()">
+        <i class="fas fa-arrow-left"></i>
+        Back to home
+      </button>
+    </div>
+  </aside>
+
+  <main class="chat-main">
+    <header class="chat-topbar">
+      <div class="model-pill">
+        <i class="fas fa-wand-magic-sparkles"></i>
+        SERA GPT
+      </div>
+      <div class="status">Secure mode • Feb 14, 2026</div>
+    </header>
+
+    <section class="chat-thread">
+      <div
+        *ngFor="let message of messages"
+        class="message-row"
+        [class.user]="message.sender === 'user'"
+        [class.ai]="message.sender === 'ai'"
+      >
+        <div class="avatar">
+          <i class="fas" [class.fa-user]="message.sender === 'user'" [class.fa-robot]="message.sender === 'ai'"></i>
+        </div>
+        <div class="message-bubble">
+          <div class="message-label">{{ message.sender === 'user' ? 'You' : 'SERA' }}</div>
+          <div class="message-content" [innerHTML]="parseMarkdown(message.content)"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="composer">
+      <div class="composer-inner">
+        <textarea
+          class="composer-input"
+          [(ngModel)]="inputText"
+          placeholder="Message SERA..."
+          rows="1"
+          (keydown)="onKeyDown($event)"
+        ></textarea>
+        <button class="send-btn" (click)="sendMessage()" title="Send">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+      <div class="composer-hint">Press Enter to send, Shift + Enter for a new line.</div>
+    </footer>
+  </main>
+</div>

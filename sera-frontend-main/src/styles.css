@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --primary-color: #00f3ff;
+  --secondary-color: #ff0055;
+  --accent-color: #ffd700;
+  --bg-color: #050505;
+  --glass-bg: rgba(10, 20, 30, 0.6);
+  --glass-border: rgba(0, 243, 255, 0.2);
+  --text-color: #e0f7fa;
+  --chat-user-bg: rgba(0, 243, 255, 0.15);
+  --chat-ai-bg: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text-color);
+  height: 100vh;
+  width: 100vw;
+}
+

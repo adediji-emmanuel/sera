@@ -1,0 +1,142 @@
+<div class="settings-container">
+  <!-- Background effect -->
+  <div class="background-grid"></div>
+
+  <!-- Back Button -->
+  <button class="back-button" (click)="goBack()" title="Back to Home">
+    <i class="fas fa-arrow-left"></i>
+    <span>BACK</span>
+  </button>
+
+  <!-- Main content -->
+  <div class="settings-content">
+    <!-- Header -->
+    <div class="settings-header">
+      <div class="header-icon">
+        <i class="fas fa-palette"></i>
+      </div>
+      <h1 class="title">CUSTOMIZATION-</h1>
+      <p class="subtitle">Personalize your AI interface</p>
+    </div>
+
+    <!-- Section Title -->
+    <h2 class="section-title">Voice Engine</h2>
+
+    <!-- Voice Selection Grid -->
+    <div class="voice-grid">
+      <!-- System Voice -->
+      <div class="voice-card" [class.active]="currentVoiceType === 'system'" (click)="selectVoiceType('system')">
+        <div class="voice-icon">
+          <i class="fas fa-desktop"></i>
+        </div>
+        <div class="voice-info">
+          <h3>System Voice</h3>
+          <p>Standard browser TTS</p>
+        </div>
+        <div class="active-indicator" *ngIf="currentVoiceType === 'system'">
+          <i class="fas fa-check-circle"></i>
+        </div>
+      </div>
+
+      <!-- ElevenLabs Voice -->
+      <div class="voice-card" [class.active]="currentVoiceType === 'eleven-labs'"
+        (click)="selectVoiceType('eleven-labs')">
+        <div class="voice-icon">
+          <i class="fas fa-waveform"></i>
+        </div>
+        <div class="voice-info">
+          <h3>ElevenLabs AI</h3>
+          <p>Premium natural speech</p>
+        </div>
+        <div class="active-indicator" *ngIf="currentVoiceType === 'eleven-labs'">
+          <i class="fas fa-check-circle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- System Voice Dropdown -->
+    <div class="voice-select-container" *ngIf="currentVoiceType === 'system'">
+      <label class="voice-select-label" for="systemVoice">System Voice</label>
+      <select id="systemVoice" class="voice-select" [(ngModel)]="selectedSystemVoiceName"
+        (ngModelChange)="selectSystemVoice($event)">
+        <option value="" disabled>Select a system voice</option>
+        <option *ngFor="let voice of availableVoices" [value]="voice.name">
+          {{ voice.name }} ({{ voice.lang }})
+        </option>
+      </select>
+      <p class="voice-select-hint" *ngIf="availableVoices.length === 0">
+        No system voices detected. Try reloading the page.
+      </p>
+    </div>
+
+    <!-- Speech Recognition Language -->
+    <div class="voice-select-container">
+      <label class="voice-select-label" for="speechLang">
+        <i class="fas fa-microphone" style="margin-right: 6px; opacity: 0.7;"></i>
+        Speech Recognition Language
+      </label>
+      <select id="speechLang" class="voice-select" [(ngModel)]="selectedSpeechLang"
+        (ngModelChange)="selectSpeechLanguage($event)">
+        <option *ngFor="let lang of speechLanguages" [value]="lang.code">
+          {{ lang.flag }} {{ lang.name }} — {{ lang.native }}
+        </option>
+      </select>
+      <p class="voice-select-hint">
+        Language used when listening to your voice. Default: English (India).
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">Visual Theme</h2>
+
+    <!-- Theme Grid -->
+    <div class="themes-grid">
+      <div *ngFor="let theme of themes" class="theme-card" [class.active]="isActiveTheme(theme.name)"
+        (click)="selectTheme(theme.name)">
+        <div class="theme-preview"
+          [style.background]="'linear-gradient(135deg, ' + theme.primary + ', ' + theme.secondary + ')'">
+          <div class="preview-orb" [style.box-shadow]="'0 0 40px ' + theme.primary"></div>
+          <div class="preview-particles">
+            <span class="particle" [style.background]="theme.primary"></span>
+            <span class="particle" [style.background]="theme.accent"></span>
+            <span class="particle" [style.background]="theme.secondary"></span>
+          </div>
+        </div>
+
+        <div class="theme-info">
+          <h3 class="theme-name">{{ theme.displayName }}</h3>
+          <div class="color-swatches">
+            <span class="swatch" [style.background]="theme.primary" [title]="theme.primary"></span>
+            <span class="swatch" [style.background]="theme.secondary" [title]="theme.secondary"></span>
+            <span class="swatch" [style.background]="theme.accent" [title]="theme.accent"></span>
+          </div>
+        </div>
+
+        <div class="active-indicator" *ngIf="isActiveTheme(theme.name)">
+          <i class="fas fa-check-circle"></i>
+          <span>ACTIVE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="info-panel">
+      <div class="info-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="info-content">
+        <h4>Theme Effects</h4>
+        <p>Changing the theme will instantly update all UI elements including particles, borders, glows, and text
+          highlights throughout the interface.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative corners -->
+  <div class="corner top-left"></div>
+  <div class="corner top-right"></div>
+  <div class="corner bottom-left"></div>
+  <div class="corner bottom-right"></div>
+</div>
+,
